@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>选择语言 / Select Language</title>
-    <link rel="icon" href="favicon.ico">
+    <title>选择网页 / Select Website</title>
     <style>
         /* ===== 全局重置 ===== */
         * {
@@ -24,17 +23,15 @@
             padding: 0;
             font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'PingFang SC', 'Microsoft YaHei', sans-serif;
             background-color: #222;
-            /* 完全复制原CSS的背景：横向灰条纹 + bg_mask图片 */
             background-image: 
                 repeating-linear-gradient(0deg,
                     rgba(54, 54, 54, 0.4) 0px,
                     rgba(54, 54, 54, 0.4) 2px,
                     transparent 2px,
-                    transparent 6px),
-                url(assets/imgs/bg_mask.ac4131.png);
-            background-position: 0% 0%, top;
-            background-repeat: repeat, repeat-x;
-            background-size: auto, auto 84.8148148148%;
+                    transparent 6px);
+            background-position: 0% 0%;
+            background-repeat: repeat;
+            background-size: auto;
             color: #fff;
             -webkit-user-select: none;
             user-select: none;
@@ -46,11 +43,11 @@
 
         /* ===== 主容器 ===== */
         .container {
-            max-width: 1000px;
+            max-width: 640px;
             width: 100%;
             background: rgba(30, 30, 30, 0.85);
             border-radius: 18px;
-            padding: 48px 40px 56px;
+            padding: 40px 36px 48px;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.06);
             position: relative;
@@ -61,8 +58,7 @@
         /* ===== 头部 ===== */
         .header {
             text-align: center;
-            margin-bottom: 40px;
-            position: relative;
+            margin-bottom: 32px;
         }
 
         .header h1 {
@@ -93,19 +89,19 @@
             box-shadow: 0 0 16px rgba(255, 241, 0, 0.15);
         }
 
-        /* ===== 语言网格 ===== */
-        .lang-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-            gap: 16px;
+        /* ===== 项目列表 ===== */
+        .project-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
         }
 
-        /* ===== 语言卡片 ===== */
-        .lang-card {
+        /* ===== 项目卡片 ===== */
+        .project-card {
             display: flex;
             align-items: center;
-            justify-content: center;
-            padding: 18px 14px;
+            justify-content: space-between;
+            padding: 18px 24px;
             border-radius: 8px;
             background: rgba(255, 255, 255, 0.04);
             border: 1px solid rgba(255, 255, 255, 0.08);
@@ -113,50 +109,68 @@
             text-decoration: none;
             color: #e0e0e0;
             font-weight: 500;
-            font-size: 16px;
-            text-align: center;
-            line-height: 1.4;
-            min-height: 70px;
+            font-size: 18px;
             transition: all 0.25s ease;
-            position: relative;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
             backdrop-filter: blur(2px);
+            min-height: 64px;
         }
 
-        .lang-card:hover {
+        .project-card:hover {
             background: rgba(255, 255, 255, 0.08);
             border-color: rgba(255, 241, 0, 0.35);
-            transform: translateY(-3px);
+            transform: translateX(4px);
             box-shadow: 0 8px 30px rgba(255, 241, 0, 0.06), 0 2px 10px rgba(0, 0, 0, 0.5);
             color: #ffffff;
         }
 
-        .lang-card:active {
-            transform: translateY(0px);
+        .project-card:active {
+            transform: translateX(0px);
             box-shadow: 0 2px 12px rgba(255, 241, 0, 0.05);
         }
 
-        .lang-card .code {
+        /* 项目名称 */
+        .project-card .label {
+            flex: 1;
+        }
+
+        /* 小标签显示目录名 + 入口文件名 */
+        .project-card .folder-tag {
             display: inline-block;
-            font-size: 11px;
+            font-size: 12px;
             font-weight: 600;
             color: rgba(255, 255, 255, 0.3);
             background: rgba(255, 255, 255, 0.06);
-            padding: 0 10px;
+            padding: 0 14px;
             border-radius: 6px;
-            margin-left: 8px;
-            line-height: 22px;
+            line-height: 28px;
             letter-spacing: 0.5px;
             border: 1px solid rgba(255, 255, 255, 0.06);
             transition: all 0.25s ease;
             font-family: 'Segoe UI', monospace;
+            flex-shrink: 0;
+            margin-left: 16px;
         }
 
-        .lang-card:hover .code {
+        .project-card:hover .folder-tag {
             background: rgba(255, 241, 0, 0.12);
             color: #fff100;
             border-color: rgba(255, 241, 0, 0.2);
             box-shadow: 0 0 16px rgba(255, 241, 0, 0.05);
+        }
+
+        /* 右箭头指示器 */
+        .project-card .arrow {
+            color: rgba(255, 255, 255, 0.15);
+            font-size: 20px;
+            margin-left: 12px;
+            transition: all 0.25s ease;
+            flex-shrink: 0;
+        }
+
+        .project-card:hover .arrow {
+            color: rgba(255, 241, 0, 0.4);
+            transform: translateX(4px);
         }
 
         /* ===== 响应式 ===== */
@@ -168,21 +182,22 @@
             .header h1 {
                 font-size: 26px;
             }
-            .lang-grid {
-                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-                gap: 12px;
+            .project-card {
+                font-size: 16px;
+                padding: 16px 18px;
+                min-height: 56px;
             }
-            .lang-card {
-                font-size: 14px;
-                padding: 14px 10px;
-                min-height: 60px;
+            .project-card .folder-tag {
+                font-size: 11px;
+                padding: 0 10px;
+                line-height: 24px;
             }
         }
 
         @media (max-width: 480px) {
             .container {
                 padding: 24px 16px 32px;
-                border-radius: 14px;
+                border-radius: 8px;
             }
             .header h1 {
                 font-size: 22px;
@@ -191,20 +206,21 @@
                 font-size: 13px;
                 letter-spacing: 1px;
             }
-            .lang-grid {
-                grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-                gap: 10px;
+            .project-card {
+                font-size: 14px;
+                padding: 14px 14px;
+                min-height: 50px;
+                border-radius: 4px;
             }
-            .lang-card {
-                font-size: 13px;
-                padding: 12px 8px;
-                min-height: 54px;
-                border-radius: 10px;
-            }
-            .lang-card .code {
+            .project-card .folder-tag {
                 font-size: 10px;
-                padding: 0 6px;
+                padding: 0 8px;
                 line-height: 20px;
+                margin-left: 10px;
+            }
+            .project-card .arrow {
+                font-size: 16px;
+                margin-left: 8px;
             }
         }
     </style>
@@ -213,41 +229,37 @@
 
     <div class="container">
         <div class="header">
-            <h1>🌐 选择您的语言</h1>
-            <p>SELECT YOUR PREFERRED LANGUAGE</p>
+            <h1>📁 选择网页</h1>
+            <p>SELECT A WEBSITE</p>
             <div class="divider"></div>
         </div>
 
-        <div class="lang-grid" id="langGrid"></div>
+        <div class="project-list" id="projectList"></div>
     </div>
 
     <script>
-        const LANGUAGES = {
-            "en-us": "English",
-            "zh-cn": "简体中文",
-            "zh-tw": "繁體中文",
-            "ja-jp": "日本語",
-            "ko-kr": "한국어",
-            "es-mx": "Español",
-            "pt-br": "Português",
-            "fr-fr": "Français",
-            "de-de": "Deutsch",
-            "ru-ru": "Русский",
-            "it-it": "Italiano",
-            "id-id": "Indonesia",
-            "th-th": "ไทย",
-            "vi-vn": "Tiếng Việt",
-        };
+        // ============================================================
+        //  项目列表
+        // ============================================================
+        const PROJECTS = [
+            { label: "终末地协议重连", folder: "EF_Protocol_Reconnection", entry: "index.html" },
+        ];
 
-        const TARGET_PAGE = "v1d0_01_returnback.html";
-        const grid = document.getElementById("langGrid");
+        // ============================================================
+        //  渲染项目卡片
+        // ============================================================
+        const list = document.getElementById("projectList");
 
-        for (const [code, displayName] of Object.entries(LANGUAGES)) {
+        for (const proj of PROJECTS) {
             const card = document.createElement("a");
-            card.className = "lang-card";
-            card.href = `${TARGET_PAGE}?lang=${encodeURIComponent(code)}`;
-            card.innerHTML = `${displayName} <span class="code">${code}</span>`;
-            grid.appendChild(card);
+            card.className = "project-card";
+            card.href = `./${proj.folder}/${proj.entry}`;
+            card.innerHTML = `
+                <span class="label">${proj.label}</span>
+                <span class="folder-tag">${proj.folder}</span>
+                <span class="arrow">›</span>
+            `;
+            list.appendChild(card);
         }
     </script>
 
