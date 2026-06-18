@@ -242,7 +242,8 @@
         //  项目列表
         // ============================================================
         const PROJECTS = [
-            { label: "终末地协议重连", folder: "EF_Protocol_Reconnection", entry: "index.html" },
+            { label: "协议重连", game: "明日方舟：终末地", folder: "EF_Protocol_Reconnection", entry: "index.html" },
+            { label: "共贺庆典", game: "明日方舟", folder: "AK_Party_Together", entry: "index.html" },
         ];
 
         // ============================================================
@@ -256,7 +257,7 @@
             card.href = `./${proj.folder}/${proj.entry}`;
             card.innerHTML = `
                 <span class="label">${proj.label}</span>
-                <span class="folder-tag">${proj.folder}</span>
+                <span class="folder-tag">${proj.game}</span>
                 <span class="arrow">›</span>
             `;
             list.appendChild(card);
