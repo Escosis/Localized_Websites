@@ -58802,7 +58802,7 @@ var _global =
                       case 2:
                         return t.a(
                           2,
-                          Ah.post("/api/auth.json", { token: e, serverId: r })
+                          Ah.get("/api/auth.json", { token: e, serverId: r })
                         );
                     }
                 }, t);
