@@ -58849,7 +58849,7 @@ var _global =
                           msg: "",
                         });
                       case 2:
-                        return t.a(2, Ah.post("/api/checkin/gift"));
+                        return t.a(2, Ah.get("/api/checkin/gift"));
                     }
                 }, t);
               })
