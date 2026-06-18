@@ -102,7 +102,7 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 18px 24px;
+            padding: 16px 24px;
             border-radius: 8px;
             background: rgba(255, 255, 255, 0.04);
             border: 1px solid rgba(255, 255, 255, 0.08);
@@ -114,7 +114,7 @@
             transition: all 0.25s ease;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
             backdrop-filter: blur(2px);
-            min-height: 64px;
+            min-height: 72px; /* 增加高度容纳两行 */
         }
 
         .project-card:hover {
@@ -130,12 +130,31 @@
             box-shadow: 0 2px 12px rgba(255, 241, 0, 0.05);
         }
 
-        /* 项目名称 */
-        .project-card .label {
+        /* 左侧信息区（纵向排列） */
+        .project-card .info {
+            display: flex;
+            flex-direction: column;
             flex: 1;
+            min-width: 0; /* 防止溢出 */
         }
 
-        /* 小标签显示目录名 + 入口文件名 */
+        /* 项目名称 */
+        .project-card .info .label {
+            font-size: 18px;
+            font-weight: 500;
+            line-height: 1.3;
+        }
+
+        /* 小字描述 */
+        .project-card .info .desc {
+            font-size: 13px;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 0.45);
+            margin-top: 2px;
+            line-height: 1.3;
+        }
+
+        /* 游戏标签（原 folder-tag） */
         .project-card .folder-tag {
             display: inline-block;
             font-size: 12px;
@@ -160,7 +179,7 @@
             box-shadow: 0 0 16px rgba(255, 241, 0, 0.05);
         }
 
-        /* 右箭头指示器 */
+        /* 右箭头 */
         .project-card .arrow {
             color: rgba(255, 255, 255, 0.15);
             font-size: 20px;
@@ -185,8 +204,14 @@
             }
             .project-card {
                 font-size: 16px;
-                padding: 16px 18px;
-                min-height: 56px;
+                padding: 14px 18px;
+                min-height: 64px;
+            }
+            .project-card .info .label {
+                font-size: 16px;
+            }
+            .project-card .info .desc {
+                font-size: 12px;
             }
             .project-card .folder-tag {
                 font-size: 11px;
@@ -209,9 +234,15 @@
             }
             .project-card {
                 font-size: 14px;
-                padding: 14px 14px;
-                min-height: 50px;
+                padding: 12px 14px;
+                min-height: 56px;
                 border-radius: 4px;
+            }
+            .project-card .info .label {
+                font-size: 14px;
+            }
+            .project-card .info .desc {
+                font-size: 11px;
             }
             .project-card .folder-tag {
                 font-size: 10px;
@@ -243,8 +274,20 @@
         //  项目列表
         // ============================================================
         const PROJECTS = [
-            { label: "协议重连 Protocol Reconnection", game: "明日方舟：终末地", folder: "EF_Protocol_Reconnection", entry: "index.html" },
-            { label: "共贺庆典 Party Together", game: "明日方舟", folder: "AK_Party_Together", entry: "index.html" },
+            { 
+                label: "协议重连 Protocol Reconnection", 
+                game: "明日方舟：终末地", 
+                folder: "EF_Protocol_Reconnection", 
+                entry: "index.html",
+                desc: "终末地回归任务" 
+            },
+            { 
+                label: "共贺庆典 Party Together", 
+                game: "明日方舟", 
+                folder: "AK_Party_Together", 
+                entry: "index.html",
+                desc: "方舟七周年小游戏" 
+            },
         ];
 
         // ============================================================
@@ -257,7 +300,10 @@
             card.className = "project-card";
             card.href = `./${proj.folder}/${proj.entry}`;
             card.innerHTML = `
-                <span class="label">${proj.label}</span>
+                <div class="info">
+                    <span class="label">${proj.label}</span>
+                    <span class="desc">${proj.desc}</span>
+                </div>
                 <span class="folder-tag">${proj.game}</span>
                 <span class="arrow">›</span>
             `;
