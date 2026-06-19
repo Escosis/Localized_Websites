@@ -68444,7 +68444,7 @@ var _global =
                           { width: n, height: A, inRotate: !1 }
                         );
                       })(
-                        null != r ? r : window.innerWidth < window.innerHeight
+                        null /* != r ? r : */ == window.innerWidth < window.innerHeight
                       );
                       i(function (e) {
                         return t.height === e.height &&
