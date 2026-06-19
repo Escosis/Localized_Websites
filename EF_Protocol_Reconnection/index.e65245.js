@@ -68412,6 +68412,8 @@ var _global =
                   var t,
                     e = 0,
                     n = function () {
+                      // 使用 matchMedia 替代宽高比较
+                      var shouldRotate = window.matchMedia("(orientation: portrait)").matches;
                       var t = (function (t) {
                         var e = window.innerWidth,
                           r = window.innerHeight;
@@ -68444,7 +68446,8 @@ var _global =
                           { width: n, height: A, inRotate: !1 }
                         );
                       })(
-                        null /* != r ? r : */ == window.innerWidth < window.innerHeight
+                        /* null != r ? r : window.innerWidth < window.innerHeight */
+                        shouldRotate
                       );
                       i(function (e) {
                         return t.height === e.height &&
