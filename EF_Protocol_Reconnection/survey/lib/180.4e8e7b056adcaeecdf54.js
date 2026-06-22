@@ -5324,7 +5324,7 @@
             return (
               E.dataSize(t, 63),
               fetch(`${L(this, hr, "f")}/batch_event`, {
-                method: "POST",
+                method: "GET", // "POST"
                 mode: "cors",
                 cache: "no-cache",
                 credentials: "omit",
