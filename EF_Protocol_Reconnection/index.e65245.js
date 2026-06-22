@@ -73031,6 +73031,51 @@ var _global =
                             return t.a(2);
                           case 1:
                             Tv.play("click"),
+                            (e = um(
+                              A("home.survey.callbackModal.title"),
+                              function () {
+                                // 领奖函数（放在按钮点击中）
+                                var claimReward = function() {
+                                  // 更新本地 surveyList 状态为 CLAIMED
+                                  var list = Hh.getState().surveyList.map(function(item) {
+                                    if (item.hashId === r.hashId) {
+                                      return Object.assign({}, item, { status: Oh.CLAIMED });
+                                    }
+                                    return item;
+                                  });
+                                  Hh.getState().setSurveyList(list);
+                                  // 显示奖励弹窗
+                                  TE(r.rewards);
+                                };
+                          
+                                return (0, Kh.jsxs)("div", {
+                                  className: dQ,
+                                  children: [
+                                    (0, Kh.jsx)("div", {
+                                      className: pQ,
+                                      children: A("home.survey.callbackModal.content"),
+                                    }),
+                                    (0, Kh.jsx)("div", {
+                                      className: hQ,
+                                      children: (0, Kh.jsx)(KS, {
+                                        onClick: function () {
+                                          claimReward();   // 先领奖
+                                          e.dispose();     // 再关闭模态框
+                                        },
+                                        children: A("home.survey.callbackModal.button"),
+                                      }),
+                                    }),
+                                  ],
+                                });
+                              },
+                              {
+                                afterClose: function() {}   // 空函数，点击叉或遮罩不会领奖
+                              }
+                            )),
+                            t.n = 2;
+                            break;
+                          /* case 1:
+                            Tv.play("click"),
                               (e = um(
                                 A("home.survey.callbackModal.title"),
                                 function () {
@@ -73066,7 +73111,7 @@ var _global =
                                           for (;;)
                                             switch (t.n) {
                                               case 0:
-                                                t.n = 1; /* t.n = 2; */
+                                                t.n = 2;
                                                 break;
                                               case 1:
                                                 return (
@@ -73089,7 +73134,7 @@ var _global =
                                                   t.a(2)
                                                 );
                                               case 2:
-                                                /* Uh().then(function (t) {
+                                                Uh().then(function (t) {
                                                   var e;
                                                   if (0 === t.code && t.data) {
                                                     var o = !1;
@@ -73136,7 +73181,7 @@ var _global =
                                                           ),
                                                       });
                                                   }
-                                                }); */
+                                                });
                                               case 3:
                                                 return t.a(2);
                                             }
@@ -73150,7 +73195,7 @@ var _global =
                                 }
                               )),
                               (t.n = 2);
-                            break;
+                            break; */
                           case 2:
                             /* for (
                               i = new URL(
@@ -73185,6 +73230,10 @@ var _global =
                               ? window.open(i, "_blank")
                               : o.WebView.openMiniWebView(i.toString());
                           case 4: */
+                            i = "./survey/" + r.hashId + ".html";
+                            o.Bridge.getPlatform() === o.Platform.Unknown
+                              ? window.open(i, "_blank")
+                              : o.WebView.openMiniWebView(i.toString());
                             return t.a(2);
                         }
                     }, t);
